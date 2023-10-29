@@ -24,13 +24,15 @@ export interface MainProps {
 export class Main extends Component<MainProps> {
   render() {
     return (
-      <ul>
-        {this.props.data.length
-          ? this.props.data.map((item, index) => (
-              <li key={index}>{item.name}</li>
-            ))
-          : 'Not found'}
-      </ul>
+      <main>
+        <ul>
+          {this.props.data.length
+            ? this.props.data.map((item, index) => (
+                <li key={index}>{item.name}</li>
+              ))
+            : 'not found'}
+        </ul>
+      </main>
     );
   }
 }

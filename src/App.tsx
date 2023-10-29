@@ -12,17 +12,17 @@ interface AppState {
 }
 
 class App extends Component<AppProps, AppState> {
-  state = {
+  public state = {
     data: [],
     loading: false,
     showError: false,
   };
 
-  getContent = (queryString: string = ''): Promise<Response> => {
+  private getContent = (queryString: string = ''): Promise<Response> => {
     return fetch(`https://swapi.dev/api/people/?search=${queryString}`);
   };
 
-  buttonHandle = async () => {
+  private buttonHandle = async () => {
     this.setState({ loading: false });
     const queryString = localStorage.getItem('search');
 
@@ -32,11 +32,11 @@ class App extends Component<AppProps, AppState> {
     this.setState({ data: data.results, loading: true });
   };
 
-  showError = () => {
+  private showError = () => {
     this.setState({ showError: true });
   };
 
-  componentDidMount(): void {
+  public componentDidMount(): void {
     this.buttonHandle();
   }
 
