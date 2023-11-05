@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import './MenuLinks.scss';
 import { Profile } from '../../types/type';
 
 export interface Props {
