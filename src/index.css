@@ -70,3 +70,31 @@ ul {
     background-color: #f9f9f9;
   }
 }
+#root{
+  display: flex;
+}
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.87);
+}
+.loader {
+  width: 2em;
+  height: 2em;
+  background: url('./assets/loading.svg') no-repeat center;
+  background-size: cover;
+  animation: loader-spin infinite 3s linear;
+  margin: 4em auto 0;
+}
+
+@keyframes loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
