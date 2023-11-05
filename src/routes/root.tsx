@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Search } from '../components/Search/Search';
-import { Main } from '../components/Main/Main';
+import { MenuLinks } from '../components/MenuLinks/MenuLinks';
 import { getContent } from '../api/api';
 
 export function Root() {
@@ -26,13 +26,14 @@ export function Root() {
   if (errorStatus) {
     throw new Error('Писец');
   }
+
   return (
     <>
       <div className="sidebar">
         <h2>The Star Wars</h2>
         <button onClick={() => setErrorStatus(true)}>Error</button>
         <Search handle={buttonHandle} />
-        {loading ? <Main data={data} /> : <div className="loader"></div>}
+        {loading ? <MenuLinks data={data} /> : <div className="loader"></div>}
       </div>
       <div id="details">
         <Outlet />

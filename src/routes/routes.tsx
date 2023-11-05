@@ -1,5 +1,4 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Main } from '../components/Main/Main';
 import { Root } from './root';
 
 export const router = createBrowserRouter([
@@ -8,8 +7,8 @@ export const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: '/',
-        element: <Main data={[]} />,
+        path: '/people/:peopleId',
+        element: <h1>1</h1>,
       },
     ],
   },
