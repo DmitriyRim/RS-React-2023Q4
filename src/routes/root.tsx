@@ -12,7 +12,7 @@ export function Root() {
   const buttonHandle = async () => {
     const queryString = localStorage.getItem('search');
     setLoading(false);
-    const response = await getContent(`?search=${queryString}` || '');
+    const response = await getContent(`/people/?search=${queryString}` || '');
     const data = await response.json();
 
     setData(data.results);

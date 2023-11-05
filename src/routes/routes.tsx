@@ -1,5 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Root } from './root';
+import { Info } from './info';
+import { loaderInfo } from '../api/loaders';
 
 export const router = createBrowserRouter([
   {
@@ -8,7 +10,8 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/people/:peopleId',
-        element: <h1>1</h1>,
+        element: <Info />,
+        loader: loaderInfo,
       },
     ],
   },
