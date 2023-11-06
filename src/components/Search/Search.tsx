@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import './Search.scss';
+import { Form } from 'react-router-dom';
 
 interface PropsSearch {
   handle: () => void;
@@ -22,12 +23,16 @@ export const Search: FC<PropsSearch> = (props) => {
     string = string.trim();
     localStorage.setItem('search', string);
   };
-  console.log(props.handle);
 
   return (
-    <div className="search-container">
-      <input type="text" defaultValue={defaultQuery} onChange={searchHandle} />
+    <Form className="search-container">
+      <input
+        type="text"
+        defaultValue={defaultQuery}
+        onChange={searchHandle}
+        name="search"
+      />
       <button onClick={props.handle}>Search</button>
-    </div>
+    </Form>
   );
 };

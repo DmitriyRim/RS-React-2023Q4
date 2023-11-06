@@ -9,7 +9,11 @@ export const router = createBrowserRouter([
     element: <Root />,
     children: [
       {
-        path: '/people/:peopleId',
+        path: '/',
+        element: <h2>Not information</h2>,
+      },
+      {
+        path: '/:peopleId',
         element: <Info />,
         loader: loaderInfo,
       },
