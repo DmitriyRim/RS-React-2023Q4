@@ -1,6 +1,7 @@
 import {
   useLoaderData as useLoaderDataOriginal,
   useNavigation,
+  useNavigate,
 } from 'react-router-dom';
 import { Profile } from '../types/type';
 
@@ -15,6 +16,7 @@ const useLoaderData: UseLoaderDataHook = () => {
 export const Info = () => {
   const data: Profile = useLoaderData<Profile>();
   const navigation = useNavigation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -27,6 +29,7 @@ export const Info = () => {
             <li>Height: {data.height}</li>
             <li>Hair color: {data.hair_color}</li>
           </ul>
+          <button onClick={() => navigate('/')}>Close</button>
         </div>
       ) : (
         <div className="loader"></div>
