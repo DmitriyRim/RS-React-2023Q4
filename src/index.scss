@@ -23,11 +23,6 @@ a:hover {
   color: #535bf2;
 }
 
-a.active{
-  display: block;
-  color: #f9f9f9;
-  text-decoration: underline;
-}
 body {
   margin: 0;
   display: flex;
@@ -63,6 +58,79 @@ ul {
   list-style-type: none;
   padding: 0;
 }
+#root{
+  width: 100%;
+  min-height: 100vh;
+}
+.main{
+  display: flex;
+}
+header{
+  text-align: center;
+  border-bottom: 1px solid #fff;
+}
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  width: 300px;
+  & ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__pagination{
+    margin: 0 auto;
+    & a{
+      padding: 0.3em;
+      color: #f9f9f9;
+    }
+  }
+}
+.profile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #535bf2;
+  min-width: 300px;
+}
+.loader {
+  width: 2em;
+  height: 2em;
+  background: url('./assets/loading.svg') no-repeat center;
+  background-size: cover;
+  animation: loader-spin infinite 3s linear;
+  margin: 4em auto 0;
+}
+.search-container{
+  display: flex;
+  justify-content: start;
+  margin-top: 1em;
+  & input {
+      width: 100%;
+      padding: 0 0.5em;
+      margin-right: 0.5em;
+  }
+}
+.active{
+  color: #f9f9f9;
+  text-decoration: underline;
+}
+@keyframes loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -73,44 +141,5 @@ ul {
   }
   button {
     background-color: #f9f9f9;
-  }
-}
-#root{
-  display: flex;
-  width: 100%;
-}
-.sidebar{
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
-  align-items: center;
-  padding: 1em;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-right: 1px solid rgba(255, 255, 255, 0.87);
-  &__menu{
-    display: flex;
-    flex-direction: column;
-  }
-}
-#details{
-  flex-basis: 100%;
-  padding: 1em;
-  text-align: center;
-}
-.loader {
-  width: 2em;
-  height: 2em;
-  background: url('./assets/loading.svg') no-repeat center;
-  background-size: cover;
-  animation: loader-spin infinite 3s linear;
-  margin: 4em auto 0;
-}
-
-@keyframes loader-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 }

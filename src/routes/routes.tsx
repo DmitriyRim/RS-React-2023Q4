@@ -1,21 +1,18 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Root } from './root';
-import { Info } from './info';
-import { loaderInfo } from '../api/loaders';
+import { Root } from '../pages/Root';
+import { Profile } from '../pages/Profile';
 
-export const router = createBrowserRouter([
+export const routes = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
     children: [
       {
-        path: '/',
-        element: <h2>Not information</h2>,
-      },
-      {
-        path: '/:peopleId',
-        element: <Info />,
-        loader: loaderInfo,
+        path: '/:userId',
+        element: <Profile />,
+        loader: ({ params }) => {
+          return fetch(`https://swapi.dev/api/people/${params.userId}`);
+        },
       },
     ],
   },

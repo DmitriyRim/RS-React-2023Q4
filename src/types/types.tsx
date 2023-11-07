@@ -1,4 +1,4 @@
-export interface Profile {
+export interface Users {
   birth_year: string;
   created: string;
   edited: string;
