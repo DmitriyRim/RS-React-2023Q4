@@ -1,62 +1,26 @@
 import { useEffect, useState } from 'react';
-import { Main } from '../components/Main/Main';
-import { Search } from '../components/Search/Search';
-import { Outlet, useLocation } from 'react-router';
-import { Link } from 'react-router-dom';
-import { getQueryParameters } from '../utils/utils';
+import { Outlet } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 export function Root() {
-  const locations = useLocation();
-  const [data, setData] = useState([]);
-  const [count, setCount] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [pages, setPages] = useState<string[]>([]);
   const [errorStatus, setErrorStatus] = useState(false);
 
-  const getContent = async (): Promise<Response> => {
-    const query = [];
-    if (getQueryParameters('search'))
-      query.push('search=' + getQueryParameters('search'));
-    if (getQueryParameters('page'))
-      query.push('page=' + getQueryParameters('page'));
-    console.log(
-      `https://swapi.dev/api/people/${
-        query.length > 0 ? '?' + query.join('&') : ''
-      }`
-    );
-    return await fetch(
-      `https://swapi.dev/api/people/${
-        query.length > 0 ? '?' + query.join('&') : ''
-      }`
-    );
-  };
-
-  const buttonHandle = async () => {
-    setLoading(false);
-    const response = await getContent();
-    const data = await response.json();
-    setData(data.results);
-    setCount(data.count);
-    setLoading(true);
-  };
-  const getPagination = () => {
-    const numbers = [];
-    const totalPages = Math.round(count / 10);
-
-    for (let i = 1; i <= totalPages; i++) {
-      numbers.push(i);
-    }
-
-    return numbers;
-  };
   const showError = () => {
     setErrorStatus(true);
   };
 
   useEffect(() => {
-    buttonHandle();
-    console.log(getQueryParameters('page'));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [locations]);
+    fetch(`https://swapi.dev/api/`)
+      .then((data) => data.json())
+      .then((links) => {
+        const a = Object.keys(links).map((key) => {
+          const url = new URL(links[key]);
+          return url.pathname.slice(5, -1);
+        });
+        setPages(a);
+      });
+  }, []);
 
   if (errorStatus) {
     throw new Error('Писец');
@@ -64,28 +28,29 @@ export function Root() {
 
   return (
     <>
-      <header>
+      <header className="header">
         <h1>The Star Wars</h1>
-      </header>
-      <main className="main">
-        <div className="sidebar">
-          <button onClick={showError}>Error</button>
-          <Search />
-          {loading ? <Main data={data} /> : <div className="loader"></div>}
-          <div className="sidebar__pagination">
-            {getPagination().map((item, index) => {
+        <nav>
+          <ul className="menu">
+            {pages.map((link, index) => {
               return (
-                <Link to={`/?page=${item}`} key={index}>
-                  {item}
-                </Link>
+                <li key={index}>
+                  <NavLink to={link} className="menu__link">
+                    {link}
+                  </NavLink>
+                </li>
               );
             })}
-          </div>
-        </div>
-        <div className="page">
-          <Outlet />
-        </div>
+          </ul>
+        </nav>
+      </header>
+      <main className="main">
+        <Outlet />
       </main>
+      <footer className="footer">
+        <p>© 2023 Dimitry Rym</p>
+        <button onClick={showError}>Error</button>
+      </footer>
     </>
   );
 }
