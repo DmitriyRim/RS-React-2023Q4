@@ -7,13 +7,17 @@ import {
   Vehicles,
   Starships,
 } from '../../types/types';
-import { useCallback, useEffect, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
 import { getContent, getQueryParameters } from '../../utils/utils';
 import './CardList.scss';
 import { useLoaderData } from '../../utils/hooks';
 import { Card } from '../Card/Card';
 import { Search } from '../Search/Search';
 import { Pagination } from '../Pagination/Pagination';
+
+export const CardContext = createContext<
+  People[] | Planets[] | Films[] | Species[] | Vehicles[] | Starships[]
+>([]);
 
 export const CardList = () => {
   const location = useLocation();
@@ -82,7 +86,9 @@ export const CardList = () => {
           <div className="card__list">
             {cartData.length > 0
               ? cartData.map((item, index) => (
-                  <Card data={item} url={getLinksUrl(item.url)} key={index} />
+                  <CardContext.Provider value={cartData} key={index}>
+                    <Card index={index} url={getLinksUrl(item.url)} />
+                  </CardContext.Provider>
                 ))
               : 'not found'}
           </div>
