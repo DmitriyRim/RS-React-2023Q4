@@ -1,27 +1,24 @@
 import { Form } from 'react-router-dom';
-import { getQueryParameters } from '../../utils/utils';
 import './Search.scss';
-import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { SearcSlice, setSearchQuery } from './searchSlice';
 
 export const Search = () => {
-  const [defaultValue, setDefaultValue] = useState('');
-
-  useEffect(() => {
-    const query = getQueryParameters('search');
-
-    if (query) {
-      localStorage.setItem('search', query);
-      setDefaultValue(query);
-    } else {
-      setDefaultValue(localStorage.getItem('search') || '');
-    }
-  }, []);
+  const search = useSelector(
+    (state: { search: SearcSlice }) => state.search.value
+  );
+  const dispatch = useDispatch();
 
   return (
-    <Form className="search-container">
+    <Form
+      className="search-container"
+      onSubmit={(event) =>
+        dispatch(setSearchQuery({ value: event.currentTarget.value }))
+      }
+    >
       <input
         type="text"
-        defaultValue={defaultValue || ''}
+        defaultValue={search}
         name="search"
         onChange={(e) => localStorage.setItem('search', e.currentTarget.value)}
       />
