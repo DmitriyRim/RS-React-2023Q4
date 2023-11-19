@@ -1,0 +1,22 @@
+.detailed {
+    &__wrapper{
+        display: flex;
+        justify-content: flex-end;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        background-color: rgba(#000000, .6);
+    }
+    &__card{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5em 1em; 
+        background-color: #535bf2;
+        max-width: 300px;
+        width: 100%;
+    }
+}
