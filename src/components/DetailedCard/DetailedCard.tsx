@@ -8,7 +8,6 @@ export const DetailedCard = () => {
   const { data: detailsData = {}, isFetching } = useGetDataQuery(
     location.pathname
   );
-  console.log(detailsData, isFetching);
 
   return (
     <div

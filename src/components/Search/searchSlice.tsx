@@ -12,8 +12,6 @@ export const searcSlice = createSlice({
   initialState,
   reducers: {
     setSearchQuery(state, action: PayloadAction<SearcSlice>) {
-      console.log(state, action);
-
       state.value = action.payload.value;
     },
   },
