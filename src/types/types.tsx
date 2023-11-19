@@ -114,3 +114,11 @@ export interface Species {
   url: string;
   title?: string;
 }
+
+export type CardsData =
+  | People
+  | Planets
+  | Films
+  | Species
+  | Vehicles
+  | Starships;

@@ -1,20 +1,17 @@
 import { NavLink } from 'react-router-dom';
 import './Card.scss';
-import { useContext } from 'react';
-import { CardContext } from '../CardList/CardList';
+import { CardsData } from '../../types/types';
 
 interface Props {
-  index: number;
+  data: CardsData;
   url: string;
 }
 
-export const Card = ({ index, url }: Props) => {
-  const context = useContext(CardContext);
-
+export const Card = ({ data, url }: Props) => {
   return (
     <>
       <div className="card">
-        <h3>{context[index].title || context[index].name}</h3>
+        <h3>{data.title || data.name}</h3>
         <NavLink to={url}>Details</NavLink>
       </div>
     </>
