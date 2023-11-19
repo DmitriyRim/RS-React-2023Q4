@@ -1,11 +1,14 @@
-import { useNavigation, useNavigate } from 'react-router-dom';
-import { useLoaderData } from '../../utils/hooks';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useGetDataQuery } from '../../api/apiSlice';
 import './DetailedCard.scss';
 
 export const DetailedCard = () => {
-  const loaderData = useLoaderData<{ [key: string]: string | string[] }>();
-  const navigation = useNavigation();
+  const location = useLocation();
   const navigate = useNavigate();
+  const { data: detailsData = {}, isFetching } = useGetDataQuery(
+    location.pathname
+  );
+  console.log(detailsData, isFetching);
 
   return (
     <div
@@ -20,21 +23,21 @@ export const DetailedCard = () => {
       }}
     >
       <div className="detailed__card">
-        {navigation.state !== 'loading' ? (
+        {!isFetching ? (
           <>
-            <h2>{loaderData?.name || loaderData?.title}</h2>
+            <h2>{detailsData?.name || detailsData?.title}</h2>
             <ul>
-              {Object.keys(loaderData).map((key: string, index: number) => {
+              {Object.keys(detailsData).map((key: string, index: number) => {
                 if (
                   key === 'name' ||
                   key === 'title' ||
                   key === 'url' ||
-                  loaderData[key] instanceof Array
+                  detailsData[key] instanceof Array
                 ) {
                   return;
                 }
 
-                return <li key={index}>{`${key}: ${loaderData[key]}`}</li>;
+                return <li key={index}>{`${key}: ${detailsData[key]}`}</li>;
               })}
             </ul>
             <button className="close">Close</button>

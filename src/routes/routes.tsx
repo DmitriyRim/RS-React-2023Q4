@@ -18,11 +18,6 @@ export const routes = createBrowserRouter([
           {
             path: ':userId',
             element: <DetailedCard />,
-            loader: ({ params }) => {
-              return fetch(
-                `https://swapi.dev/api/${params.categoryName}/${params.userId}`
-              );
-            },
           },
         ],
       },
